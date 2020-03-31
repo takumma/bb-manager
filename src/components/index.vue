@@ -4,6 +4,11 @@
       <input type="text"
         placeholder="TODOを入力しましょう！"
         v-model="newItemTitle">
+      <Datepicker
+        v-model="defaultDate"
+        :format="DatePickerFormat"
+        :language="ja"
+        name="datepicker"></Datepicker>
 			<button v-on:click="addTodo(newItemTitle)">add</button>
       <button v-on:click="deleteTodo()">clean</button>
     </p>
@@ -16,15 +21,30 @@
 
 <script>
 import TodoItem from '@/components/TodoItem.vue'
+import Datepicker from 'vuejs-datepicker'
 export default {
   data: function() {
     return {
 			items: [],
 			newItemTitle: '',
+
+      //Datapicker
+      defaultDate: new Date(),
+        DatePickerFormat: 'yyyy-MM-dd',
+        ja: {
+            language: 'Japanese',
+            months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            days: ['日', '月', '火', '水', '木', '金', '土'],
+            rtl: false,
+            ymd: 'yyyy-MM-dd',
+            yearSuffix: '年'
+        }
 		}
 	},
 	components: {
 		TodoItem,
+    Datepicker
 	},
   methods: {
     updateCheck: function(childChecked, childIndex){  //updateCheckメソッドをまるっと追加
