@@ -7,7 +7,7 @@
         v-on:keyup.enter="addTodo(newItemTitle)">
       <button v-on:click="deleteTodo()">clean</button>
     </p>
-    <transition-group name="list-complete" tag="ul">
+    <transition-group name="list-complete" tag="ul" class="todos">
       <TodoItem v-for="item in items" v-bind="item" v-bind:key="item.id" v-on:delete="updateCheck"></TodoItem>
     </transition-group>
     
@@ -73,6 +73,10 @@ export default {
 }
 .list-complete-item {
     transition: all 1s;
+    list-style:none;
+    padding:20px;
+    border:1px black solid;
+    max-width:50%;
   }
   .list-complete-enter, .list-complete-leave-to
   /* .list-complete-leave-active for below version 2.1.8 */ {
@@ -82,4 +86,8 @@ export default {
   .list-complete-leave-active {
     position: absolute;
   }
+
+ .todos{
+   text-align:center;
+ }
 </style>
