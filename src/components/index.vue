@@ -2,9 +2,14 @@
     <div id="app">
     <p>
       <input type="text"
-        placeholder="TODOを入力しましょう！"
-        v-model="newItemTitle"
-        v-on:keyup.enter="addTodo(newItemTitle)">
+        placeholder="買ったものを入力しよう！"
+        v-model="newItemTitle">
+      <Datepicker
+        v-model="date"
+        :format="DatePickerFormat"
+        :language="ja"
+        name="datepicker"></Datepicker>
+			<button v-on:click="addTodo(newItemTitle, date)">add</button>
       <button v-on:click="deleteTodo()">clean</button>
     </p>
     <transition-group name="list-complete" tag="ul" class="todos">
@@ -16,15 +21,31 @@
 
 <script>
 import TodoItem from '@/components/TodoItem.vue'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment/moment'
 export default {
   data: function() {
     return {
 			items: [],
 			newItemTitle: '',
+
+      //Datapicker
+      date: new Date(),
+        DatePickerFormat: 'yyyy-MM-dd',
+        ja: {
+            language: 'Japanese',
+            months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            days: ['日', '月', '火', '水', '木', '金', '土'],
+            rtl: false,
+            ymd: 'yyyy-MM-dd',
+            yearSuffix: '年'
+        }
 		}
 	},
 	components: {
 		TodoItem,
+    Datepicker
 	},
   methods: {
     updateCheck: function(childChecked, childIndex){  //updateCheckメソッドをまるっと追加
@@ -35,15 +56,19 @@ export default {
         }
       }
     },
-    addTodo: function(newTitle){
-      let date = Date.now();
-      this.items.push({
-        title: newTitle,
-        isChecked: false,
-        id: date  //idを追加
-      });
-      this.newItemTitle = '';
-      this.saveTodo();
+    addTodo: function(newTitle, bb){
+			if(this.newItemTitle !== '') {
+        let date = Date.now();
+        bb = this.customformat(bb);
+				this.items.push({
+					title: newTitle,
+					isChecked: false,
+          id: date,  //idを追加
+          bb: bb,
+				});
+				this.newItemTitle = '';
+				this.saveTodo();
+			}
     },
     deleteTodo: function(){
       this.items = this.items.filter(function (item) {
@@ -52,6 +77,9 @@ export default {
       this.saveTodo();
     },
     saveTodo: function(){
+      this.items.sort(function(a, b) {
+        return (a.bb > b.bb ? 1 : -1);
+      });
       localStorage.setItem('items', JSON.stringify(this.items));
     },
     loadTodo: function(){
@@ -60,8 +88,12 @@ export default {
         this.items = [];
       }
     },
+    customformat: function(value) {
+      return moment(value).format('YYYY-MM-DD');
+    },
   },
   mounted: function(){
+    localStorage.clear();
     this.loadTodo();
   },
 }
@@ -76,7 +108,7 @@ export default {
     list-style:none;
     padding:20px;
     border:1px black solid;
-    max-width:50%;
+    margin-top:20px;
   }
   .list-complete-enter, .list-complete-leave-to
   /* .list-complete-leave-active for below version 2.1.8 */ {
