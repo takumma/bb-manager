@@ -31,16 +31,16 @@ export default {
 
       //Datapicker
       date: new Date(),
-        DatePickerFormat: 'yyyy-MM-dd',
-        ja: {
-            language: 'Japanese',
-            months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            days: ['日', '月', '火', '水', '木', '金', '土'],
-            rtl: false,
-            ymd: 'yyyy-MM-dd',
-            yearSuffix: '年'
-        }
+      DatePickerFormat: 'yyyy-MM-dd',
+      ja: {
+        language: 'Japanese',
+        months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        days: ['日', '月', '火', '水', '木', '金', '土'],
+        rtl: false,
+        ymd: 'yyyy-MM-dd',
+        yearSuffix: '年'
+      }
 		}
 	},
 	components: {
@@ -65,7 +65,7 @@ export default {
 					isChecked: false,
           id: date,  //idを追加
           bb: bb,
-				});
+        });        
 				this.newItemTitle = '';
 				this.saveTodo();
 			}
