@@ -22,6 +22,7 @@
 <script>
 import TodoItem from '@/components/TodoItem.vue'
 import Datepicker from 'vuejs-datepicker'
+import moment from 'moment/moment'
 export default {
   data: function() {
     return {
@@ -57,7 +58,8 @@ export default {
     },
     addTodo: function(newTitle, bb){
 			if(this.newItemTitle !== '') {
-				let date = Date.now();
+        let date = Date.now();
+        bb = this.customformat(bb);
 				this.items.push({
 					title: newTitle,
 					isChecked: false,
@@ -82,6 +84,9 @@ export default {
       if( !this.items ){
         this.items = [];
       }
+    },
+    customformat: function(value) {
+      return moment(value).format('YYYY-MM-DD');
     },
   },
   mounted: function(){
