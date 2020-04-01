@@ -2,10 +2,10 @@
     <div id="app">
     <p>
       <input type="text"
-        placeholder="TODOを入力しましょう！"
+        placeholder="買ったものを入力しよう！"
         v-model="newItemTitle">
       <Datepicker
-        v-model="defaultDate"
+        v-model="date"
         :format="DatePickerFormat"
         :language="ja"
         name="datepicker"></Datepicker>
@@ -29,7 +29,7 @@ export default {
 			newItemTitle: '',
 
       //Datapicker
-      defaultDate: new Date(),
+      date: new Date(),
         DatePickerFormat: 'yyyy-MM-dd',
         ja: {
             language: 'Japanese',
