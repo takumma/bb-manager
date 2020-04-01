@@ -76,7 +76,7 @@ export default {
     list-style:none;
     padding:20px;
     border:1px black solid;
-    max-width:50%;
+    margin-top:20px;
   }
   .list-complete-enter, .list-complete-leave-to
   /* .list-complete-leave-active for below version 2.1.8 */ {
