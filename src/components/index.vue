@@ -9,7 +9,7 @@
         :format="DatePickerFormat"
         :language="ja"
         name="datepicker"></Datepicker>
-			<button v-on:click="addTodo(newItemTitle)">add</button>
+			<button v-on:click="addTodo(newItemTitle, date)">add</button>
       <button v-on:click="deleteTodo()">clean</button>
     </p>
     <transition-group name="list-complete" tag="ul" class="todos">
@@ -55,13 +55,14 @@ export default {
         }
       }
     },
-    addTodo: function(newTitle){
+    addTodo: function(newTitle, bb){
 			if(this.newItemTitle !== '') {
 				let date = Date.now();
 				this.items.push({
 					title: newTitle,
 					isChecked: false,
-					id: date  //idを追加
+          id: date,  //idを追加
+          bb: bb,
 				});
 				this.newItemTitle = '';
 				this.saveTodo();
@@ -84,6 +85,7 @@ export default {
     },
   },
   mounted: function(){
+    localStorage.clear();
     this.loadTodo();
   },
 }
