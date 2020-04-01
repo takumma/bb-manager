@@ -77,6 +77,9 @@ export default {
       this.saveTodo();
     },
     saveTodo: function(){
+      this.items.sort(function(a, b) {
+        return (a.bb > b.bb ? 1 : -1);
+      });
       localStorage.setItem('items', JSON.stringify(this.items));
     },
     loadTodo: function(){
