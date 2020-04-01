@@ -9,8 +9,8 @@
         :format="DatePickerFormat"
         :language="ja"
         name="datepicker"></Datepicker>
-			<button v-on:click="addTodo(newItemTitle, date)">add</button>
-      <button v-on:click="deleteTodo()">clean</button>
+			<button v-on:click="addTodo(newItemTitle, date)">買った</button>
+      <button v-on:click="deleteTodo()">食べた</button>
     </p>
     <transition-group name="list-complete" tag="ul" class="todos">
       <TodoItem v-for="item in items" v-bind="item" v-bind:key="item.id" v-on:delete="updateCheck"></TodoItem>
