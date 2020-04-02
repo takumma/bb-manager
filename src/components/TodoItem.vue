@@ -18,7 +18,8 @@ export default {
 
       // isExpired
       ClassDanger: 'danger',
-      ClassWarn: 'warn'
+      ClassWarn: 'warn',
+      ClassSafety: 'safety',
     }
   },
   methods: {
@@ -28,8 +29,15 @@ export default {
     isExpired: function(day) {
       if(day < 0) {
         return this.ClassDanger;
-      } else if(day <= 5) {
+      } else if(day <= 3) {
         return this.ClassWarn;
+      } else {
+        return this.ClassSafety;
+      }
+    },
+    bbDaysFormat(days) {
+      if(days === 0) {
+        days = '本日中'
       }
     }
   }
@@ -42,5 +50,8 @@ export default {
 }
 .warn {
   background-color: rgba(255, 255, 0.5);
+}
+.safety {
+  background-color: rgba(0, 255, 0, 0.5);
 }
 </style>
